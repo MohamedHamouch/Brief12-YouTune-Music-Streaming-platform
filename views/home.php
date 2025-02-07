@@ -13,13 +13,14 @@
   <?php
   require_once "header.php";
   ?>
-  
+
   <section class="text-center py-24 bg-gradient-to-r from-purple-600 to-blue-500">
     <h2 class="text-5xl font-extrabold">Discover Your Next Favorite Song</h2>
     <p class="mt-4 text-xl">Stream millions of songs ad-free, anytime, anywhere.</p>
-    <button
-      class="mt-8 px-8 py-3 bg-white text-gray-900 font-bold rounded-full text-lg shadow-lg hover:bg-gray-200">Start
-      Listening</button>
+    <a href="/browse"
+      class="inline-block mt-8 px-8 py-3 bg-white text-gray-900 font-bold rounded-full text-lg shadow-lg hover:bg-gray-200">
+      Start Listening
+    </a>
   </section>
 
   <section class="p-10">
