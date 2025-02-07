@@ -1,59 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
+require_once './config/database.php';
+require_once './controllers/authController.php';
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>YouTune - Home</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
+$url = $_SERVER['REQUEST_URI'];
 
-<body class="bg-gray-900 text-white">
-  <header class="flex justify-between items-center p-6 bg-gray-800 shadow-lg">
-    <h1 class="text-3xl font-extrabold text-purple-400">YouTune</h1>
-    <nav>
-      <ul class="flex space-x-6 text-lg">
-        <li><a href="#" class="hover:text-purple-400">Home</a></li>
-        <li><a href="#" class="hover:text-purple-400">Browse</a></li>
-        <li><a href="#" class="hover:text-purple-400">Library</a></li>
-        <li><a href="#" class="hover:text-purple-400">Login</a></li>
-      </ul>
-    </nav>
-  </header>
+if (preg_match("#^/(views|models|config|controllers|assets|js)/#", $url)) {
+  require './views/404.html';
+  exit;
+}
 
-  <section class="text-center py-24 bg-gradient-to-r from-purple-600 to-blue-500">
-    <h2 class="text-5xl font-extrabold">Discover Your Next Favorite Song</h2>
-    <p class="mt-4 text-xl">Stream millions of songs ad-free, anytime, anywhere.</p>
-    <button
-      class="mt-8 px-8 py-3 bg-white text-gray-900 font-bold rounded-full text-lg shadow-lg hover:bg-gray-200">Start
-      Listening</button>
-  </section>
+$allowed_routes = ['/', '/home', '/login', '/register', '/browse', '/library', '/album'];
+if (in_array($url, $allowed_routes)) {
+  if ($url == '/' || $url == '/home') {
 
-  <section class="p-10">
-    <h3 class="text-3xl font-semibold mb-6">Trending Now</h3>
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-      <div class="bg-gray-800 p-6 rounded-lg shadow-md">
-        <img src="https://via.placeholder.com/150" class="w-full rounded-md" alt="Album Cover">
-        <h4 class="mt-3 font-bold text-lg">Album Name</h4>
-        <p class="text-gray-400 text-sm">Artist Name</p>
-      </div>
-      <div class="bg-gray-800 p-6 rounded-lg shadow-md">
-        <img src="https://via.placeholder.com/150" class="w-full rounded-md" alt="Album Cover">
-        <h4 class="mt-3 font-bold text-lg">Album Name</h4>
-        <p class="text-gray-400 text-sm">Artist Name</p>
-      </div>
-      <div class="bg-gray-800 p-6 rounded-lg shadow-md">
-        <img src="https://via.placeholder.com/150" class="w-full rounded-md" alt="Album Cover">
-        <h4 class="mt-3 font-bold text-lg">Album Name</h4>
-        <p class="text-gray-400 text-sm">Artist Name</p>
-      </div>
-      <div class="bg-gray-800 p-6 rounded-lg shadow-md">
-        <img src="https://via.placeholder.com/150" class="w-full rounded-md" alt="Album Cover">
-        <h4 class="mt-3 font-bold text-lg">Album Name</h4>
-        <p class="text-gray-400 text-sm">Artist Name</p>
-      </div>
-    </div>
-  </section>
-</body>
+    require_once './views/home.php';
+  } elseif ($url == '/login') {
 
-</html>
+    $authCon = new AuthController($db);
+    $authCon->login();
+  } elseif ($url == '/register') {
+
+    $authCon = new AuthController($db);
+    $authCon->register();
+  } elseif ($url == '/browse') {
+
+    require_once './views/browse.php';
+  } elseif ($url == '/library') {
+
+    require_once './views/library.php';
+  } elseif ($url == '/album') {
+
+    require_once './views/album.php';
+  } else {
+
+    require_once './views/404.html';
+  }
+
+} else {
+  require_once './views/404.html';
+}
+
+
+?>
