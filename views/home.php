@@ -12,6 +12,16 @@
 
   <?php
   require_once "header.php";
+
+  if (isset($_SESSION['error'])) {
+    echo "<script>alert('{$_SESSION['error']}')</script>";
+    unset($_SESSION['error']);
+  }
+
+  if (isset($_SESSION['message'])) {
+    echo "<script>alert('{$_SESSION['message']}')</script>";
+    unset($_SESSION['message']);
+  }
   ?>
 
   <section class="text-center py-24 bg-gradient-to-r from-purple-600 to-blue-500">
