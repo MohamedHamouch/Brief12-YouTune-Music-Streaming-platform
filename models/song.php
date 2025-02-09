@@ -41,6 +41,25 @@ class Song
     $this->album_id = $album_id;
   }
 
+  public function loadSong($db)
+  {
+    $query = "SELECT * FROM songs WHERE id = :song_id";
+    $stmt = $db->prepare($query);
+    $stmt->bindParam(':song_id', $this->id, PDO::PARAM_INT);
+    $stmt->execute();
+
+    $song = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($song) {
+      $this->title = $song['title'];
+      $this->album_id = $song['album_id'];
+      $this->audio = $song['audio'];
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   public function saveSong($db)
   {
     $query = "INSERT INTO songs (title, album_id, audio) VALUES (:title, :album_id, :audio)";
@@ -49,6 +68,16 @@ class Song
     $stmt->bindParam(':title', $this->title, PDO::PARAM_STR);
     $stmt->bindParam(':album_id', $this->album_id, PDO::PARAM_INT);
     $stmt->bindParam(':audio', $this->audio, PDO::PARAM_STR);
+
+    return $stmt->execute();
+  }
+
+  public function deleteSong($db)
+  {
+    $query = "DELETE FROM songs WHERE id = :song_id";
+
+    $stmt = $db->prepare($query);
+    $stmt->bindParam(':song_id', $this->id, PDO::PARAM_INT);
 
     return $stmt->execute();
   }
