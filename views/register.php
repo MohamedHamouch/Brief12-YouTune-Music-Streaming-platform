@@ -10,7 +10,6 @@
 
 <body class="bg-gray-900 text-white">
   <?php
-  session_start();
   require_once "header.php";
 
   if (isset($_SESSION['error'])) {

@@ -11,12 +11,16 @@
 
 <body class="bg-gray-900 text-white">
   <?php
-  session_start();
   require_once "header.php";
 
   if (isset($_SESSION['error'])) {
     echo "<script>alert('{$_SESSION['error']}')</script>";
     unset($_SESSION['error']);
+  }
+  
+  if (isset($_SESSION['message'])) {
+    echo "<script>alert('{$_SESSION['message']}')</script>";
+    unset($_SESSION['message']);
   }
   ?>
   <section class="max-w-lg mx-auto p-8 bg-gray-800 rounded-lg mt-24">
