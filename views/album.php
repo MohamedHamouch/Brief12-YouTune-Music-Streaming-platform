@@ -76,9 +76,10 @@
                     <i class="fas fa-plus-circle text-2xl"></i>
                   </button>
                 <?php elseif ($user instanceof Artist && $user->getId() == $album->getArtistId()): ?>
-                  <form action="delete_song.php" method="POST" class="inline-block">
+                  <form action="/album" method="POST" class="inline-block">
                     <input type="hidden" name="song_id" value="<?= $song['id'] ?>">
-                    <button type="submit" class="text-red-500">
+                    <input type="hidden" name="album_id" value="<?= $album->getId() ?>">
+                    <button type="submit" name="remove_song" class="text-red-500">
                       <i class="fas fa-trash-alt text-xl"></i>
                     </button>
                   </form>
@@ -122,7 +123,7 @@
 
   if ($user instanceof Artist && $user->getId() == $album->getArtistId()): ?>
     <div id="uploadForm" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-      <form class="bg-gray-800 p-6 rounded-lg shadow-lg w-96" enctype="multipart/form-data" method="POST">
+      <form class="bg-gray-800 p-6 rounded-lg shadow-lg w-96" action="/album" enctype="multipart/form-data" method="POST">
         <input type="hidden" name="album_id" value="<?= $album_id ?>">
 
         <div class="mb-4">
