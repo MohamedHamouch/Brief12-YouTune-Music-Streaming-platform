@@ -30,6 +30,10 @@ class CatalogController
         $this->createAlbum();
       } else if (isset($_POST['delete_album'])) {
         $this->deleteAlbum();
+      } else {
+        $_SESSION['error'] = "Invalid request!";
+        header("Location: /catalog");
+        exit();
       }
     } else {
       $albums = Album::getArtistAlbums($this->db, $user->getId());

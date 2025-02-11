@@ -16,6 +16,10 @@ class AlbumController
         $this->uploadSong();
       } elseif (isset($_POST['remove_song'])) {
         $this->removeSong();
+      } else {
+        $_SESSION['error'] = "Invalid request!";
+        header("Location: /browse");
+        exit();
       }
 
     } else {
