@@ -96,7 +96,7 @@
   <?php if ($user instanceof Member) { ?>
 
     <div id="playlistForm" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-      <form class="bg-gray-800 p-6 rounded-lg shadow-lg w-96">
+      <form class="bg-gray-800 p-6 rounded-lg shadow-lg w-96" method="POST">
         <input type="hidden" name="song_id" id="song_id">
         <div class="mb-4">
           <label class="block text-sm font-medium mb-2">Song Title</label>
@@ -105,7 +105,7 @@
         <div class="mb-4">
           <label class="block text-sm font-medium mb-2">Select Playlist</label>
           <select name="playlist_id" class="w-full bg-gray-700 rounded p-2">
-
+            <option value="" selected disabled>Select Playlist</option>
             <?php foreach ($playlists as $playlist): ?>
               <option value="<?= $playlist['id'] ?>"><?= htmlspecialchars($playlist['title']) ?></option>
             <?php endforeach; ?>
@@ -151,7 +151,7 @@
     <source id="audioSource" type="audio/mp3">
     Your browser does not support the audio element.
   </audio>
-
+  <script src="../js/album.js"></script>
   <script src="../js/song.js"></script>
 </body>
 
