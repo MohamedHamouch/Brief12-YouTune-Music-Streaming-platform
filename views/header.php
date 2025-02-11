@@ -16,6 +16,8 @@
           echo '<li><a href="/dashboard" class="hover:text-purple-400">Dashboard</a></li>';
         } elseif ($user instanceof Artist) {
           echo '<li><a href="/catalog" class="hover:text-purple-400">Catalog</a></li>';
+        } elseif ($user instanceof Member) {
+          echo '<li><a href="/library" class="hover:text-purple-400">Library</a></li>';
         }
 
         echo '<li><a href="/logout" class="hover:text-purple-400">Logout</a></li>';
@@ -23,7 +25,7 @@
         echo '<li><a href="/login" class="hover:text-purple-400">Login</a></li>';
         echo '<li><a href="/register" class="hover:text-purple-400">Register</a></li>';
       }
-      
+
       ?>
     </ul>
   </nav>
